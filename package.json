@@ -5,5 +5,9 @@
   "devDependencies": {
     "@types/jest": "^28.1.6",
     "@types/react": "^18.0.15"
+  },
+  "scripts": {
+    "patron": "npm --prefix ./patron run start",
+    "run server": ""
   }
 }

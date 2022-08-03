@@ -4,6 +4,7 @@ import './site-page.component.scss';
 export function SitePageComponent(){
     return (
         <div className='site-page'>
+            Hello
             <div className="header">
                 <div className="logo"></div>
                 <div className="options"></div>
