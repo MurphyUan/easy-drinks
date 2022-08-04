@@ -11,13 +11,12 @@ export function HeaderComponent(){
                 <button className="logo" onClick={redirectToUrl}>
                     <h1>easy-drinks</h1>
                 </button>
+                <div className="search-bar">
+                    <input type="text" />
+                </div>
                 <div className="options-panel">
-                    {/* Show Cart */}
-                    <button>Cart</button>
-                    {/* Options */}
-                    <button>Options</button>
-                    {/* Settings */}
-                    <button>Settings</button>
+                    <button><h2>Options</h2></button>
+                    <button><h2>Cart</h2></button>
                 </div>
         </div>
     )
