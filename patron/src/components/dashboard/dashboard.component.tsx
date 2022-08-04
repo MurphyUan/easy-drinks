@@ -14,7 +14,9 @@ export function DashboardComponent(){
             </div>
             <div className='main-body'>
                 <div className='left-index'></div>
-                <div className='middle-panel'></div>
+                <div className='middle-panel'>
+                    {}
+                </div>
             </div>
         </div>
     )
