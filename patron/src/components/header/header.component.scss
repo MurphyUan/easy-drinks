@@ -1,0 +1,15 @@
+.header-wrapper {
+    display: flex;
+    flex-direction: row;
+
+    .logo {
+        float: left;
+        height: 100%;
+        width: 20%;
+
+        border-radius: 2rem;
+        border: 2px solid rgb(214, 214, 214);
+        background-color: white;
+        text-align: center;
+    }
+}

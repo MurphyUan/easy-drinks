@@ -1,7 +1,7 @@
 import React from 'react';
-import './site-page.component.scss';
+import './dashboard.component.scss';
 
-export function SitePageComponent(){
+export function DashboardComponent(){
     return (
         <div className='site-page'>
             <div className="header">
