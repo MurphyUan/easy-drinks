@@ -10,7 +10,9 @@ app.get('/', (req, res) => {
 });
 
 app.get('/restaurants', (req,res) => {
-    res.status(200).send("restaurants");
+    firebase.getRestaurants()
+        .then(result => res.status(200).send(result))
+        .catch(err => res.status(401).send(err));
 })
 
 app.listen(PORT, () => {

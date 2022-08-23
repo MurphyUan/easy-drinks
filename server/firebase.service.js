@@ -1,5 +1,5 @@
 const { initializeApp } = require('firebase/app');
-const { getFirestore }  = require('firebase/firestore') ;
+const { getFirestore, collection, getDocs }  = require('firebase/firestore') ;
 
 class FireBaseService {
 
@@ -18,6 +18,27 @@ class FireBaseService {
   constructor() {
     this.firebaseApp = initializeApp(this.firebaseConfig);
     this.firebaseDB = getFirestore(this.firebaseApp);
+  }
+
+  // async getRestaurants() {
+  //   const restaurantCol = collection(this.firebaseDB, 'restaurants');
+  //   const restaurantSnapshot = await getDocs(restaurantCol);
+  //   const restaurantList = restaurantSnapshot.docs.map((doc) => {
+  //     doc.data()
+  //   })
+  //   return restaurantList;
+  // }
+
+  async getRestaurants(){
+    return new Promise((resolve, reject) => {
+      getDocs(collection(this.firebaseDB, 'restaurants'))
+        .then(data => {
+          resolve(data.docs.map(doc => doc.data()));
+        })
+        .catch(err => {
+          reject(err);
+        });
+    })
   }
 
 }
