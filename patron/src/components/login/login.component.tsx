@@ -1,25 +1,39 @@
 import React, { useState } from 'react';
+import { FirebaseService } from '../../services/firebase.service';
+import './login.component.scss';
 
-export function LoginComponent( 
-    setToken: any
-    ){
+type LoginComponentProps = {
+    firebaseService: FirebaseService;
+    setToken: (value: boolean) => void;
+}
+
+export const LoginComponent = ({firebaseService, setToken}:LoginComponentProps) => {
+
+    const [ email, updateEmail] = useState('');
+    const [ password, updatePassword] = useState('');
+
+    const handleEmailChange = ((e: any) => updateEmail(e.target.value));
+    const handlePassChange = ((e: any) => updatePassword(e.target.value));
+
+    function checkEmailAuth(){
+        firebaseService.setupEmailAuth(email, password)
+            .then((result: boolean) => setToken(result))
+            .catch((err) => console.log(err));
+    }
+
+    function checkAnonymousAuth(){
+        firebaseService.setupAnonymouseAuth()
+            .then((result: boolean) => setToken(result))
+            .catch((err) => console.log(err));
+    }
 
     return(
-        <div className='login-wrapper'>
-            <h1>Please Log In</h1>
-            <form>
-                <label>
-                    <p></p>
-                    <input type="text"/>
-                </label>
-                <label>
-                    <p></p>
-                    <input type="password"/>
-                </label>
-                <div>
-                    <button type="submit">Submit</button>
-                </div>
-            </form>
+        <div className='login wrapper'>
+            <h1>Sign in</h1>
+            <input type="text" value={email} onChange={handleEmailChange} placeholder='Email'/><br/>
+            <input type="password" value={password} onChange={handlePassChange} placeholder='Password'/><br/>
+            <button className='admin' onClick={checkEmailAuth}>Submit</button><br/><br/>
+            <button className='default' onClick={checkAnonymousAuth}>Continue As Guest</button>
         </div>
     )
 }

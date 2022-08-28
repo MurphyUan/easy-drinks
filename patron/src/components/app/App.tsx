@@ -15,27 +15,27 @@ export const App = () => {
 
   const firebaseService = new FirebaseService();
 
-  useMemo(() => {
-    firebaseService.setupAnonymouseAuth()
-      .then(result => setToken(result))
-      .catch(() => setToken(false));
-  }, []);
+  // useMemo(() => {
+  //   firebaseService.setupAnonymouseAuth()
+  //     .then(result => setToken(result))
+  //     .catch(() => setToken(false));
+  // }, []);
 
-  useMemo(() => {
-    firebaseService.getCollection('restaurants')
-      .then(result => {
-        console.log(result)
-        setRestaurant(result)
-      })
-      .catch(err => console.log(err));
-  }, [])
+  // useMemo(() => {
+  //   firebaseService.getCollection('restaurants')
+  //     .then(result => {
+  //       console.log(result)
+  //       setRestaurant(result)
+  //     })
+  //     .catch(err => console.log(err));
+  // }, [])
   
-  let canAccess = token ? <DashboardComponent/> : <LoginComponent/>
+  let canAccess = token ? <HeaderComponent/> : <LoginComponent setToken={setToken} firebaseService={firebaseService}/>
 
   return (
     <div className="wrapper">
-      <HeaderComponent />
-      {restaurant.map(data => <li>{data.test}</li>)}
+      { canAccess }
+      {/* {restaurant.map(data => <li>{data.test}</li>)} */}
     </div>
   );
 }

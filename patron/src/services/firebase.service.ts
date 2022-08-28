@@ -5,13 +5,15 @@ import {
     signInWithPopup,
     signInAnonymously, 
     signInWithEmailAndPassword, 
-    GoogleAuthProvider } from 'firebase/auth';
+    GoogleAuthProvider, 
+    Auth} from 'firebase/auth';
 import { getFirestore, collection, getDocs, doc } from 'firebase/firestore';
 
 export class FirebaseService {
 
     private firebaseApp: any;
     private firebaseDB: any;
+    private firebaseAuth: Auth;
 
     private firebaseConfig = {
         apiKey: "AIzaSyDt7wQ2GpdNcyTKvOKMJqI51I8Jhs-yynY",
@@ -25,18 +27,28 @@ export class FirebaseService {
     constructor(){
         this.firebaseApp = initializeApp(this.firebaseConfig);
         this.firebaseDB = getFirestore(this.firebaseApp);
+        this.firebaseAuth = getAuth(this.firebaseApp);
     }
 
     async setupAnonymouseAuth(){
         return new Promise<boolean>((resolve, reject) => {
-            const auth = getAuth(this.firebaseApp);
-            signInAnonymously(auth)
+            signInAnonymously(this.firebaseAuth)
                 .then(() => {
                     console.log("User Authenticated Anonymously");
                     resolve(true)
                 })
                 .catch(error => reject(error));
         });
+    }
+
+    async setupEmailAuth(email: string, password: string){
+        return new Promise<boolean>((resolve, reject) => {
+            signInWithEmailAndPassword(this.firebaseAuth, email, password)
+                .then(() => {
+                    resolve(true)
+                })
+                .catch(error => reject(error));
+        })
     }
 
     async getCollection(colName: string){
