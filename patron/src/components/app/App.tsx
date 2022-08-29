@@ -1,8 +1,6 @@
-import React, { useState, useMemo } from 'react';
+import { useState } from 'react';
 import './App.scss';
-import { DashboardComponent } from '../dashboards/dashboard.component';
 import { LoginComponent } from '../login/login.component';
-import { HeaderComponent } from '../header/header.component';
 import { FirebaseService } from '../../services/firebase.service';
 import { AdminDashBoardComponent } from '../dashboards/admin-dashboard/admin-dashboard';
 import { ClientDashBoardComponent } from '../dashboards/client-dashboard/client-dashboard';
@@ -34,12 +32,12 @@ export const App = () => {
   // }, [])
 
   let isAdmin = admin ? <AdminDashBoardComponent firebaseService={firebaseService}/> : <ClientDashBoardComponent firebaseService={firebaseService}/>
-  let canAccess = auth ? isAdmin : <LoginComponent setToken={checkAuth} firebaseService={firebaseService}/>
+  let mainDisplay = auth ? isAdmin : <LoginComponent setToken={checkAuth} firebaseService={firebaseService}/>
   
 
   return (
     <div className="wrapper">
-      { canAccess }
+      { mainDisplay }
     </div>
   );
 }

@@ -8,6 +8,6 @@ export const MenuComponent = ({...props}: MenuProps) => {
 
 
     return (
-        <div></div>
+        <div>Menu Component</div>
     )
 }
