@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import './App.scss';
-import { DashboardComponent } from '../dashboard/dashboard.component';
+import { DashboardComponent } from '../dashboards/dashboard.component';
 import { LoginComponent } from '../login/login.component';
 import { HeaderComponent } from '../header/header.component';
 import { FirebaseService } from '../../services/firebase.service';

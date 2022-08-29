@@ -4,12 +4,13 @@ type MenuItemProps = {
     imageUrl: string;
     name: string;
     description: string;
+    ingredients: string[];
     price: number;
     disabled: boolean;
     addItemToCart: () => void;
 }
 
-export const MenuItemComponent = ({...props}:MenuItemProps) => {
+export const MenuItemComponent = ({...props}:MenuItemProps, canBeDisabled: boolean) => {
 
     const callATIC = () => {
         props.addItemToCart();
