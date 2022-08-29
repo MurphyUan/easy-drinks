@@ -11,6 +11,9 @@ export const LoginComponent = ({firebaseService, setToken}:LoginComponentProps) 
 
     const [ email, updateEmail] = useState('');
     const [ password, updatePassword] = useState('');
+    const [ invalidCredentials, updateInvalid] = useState(false);
+
+    const displayError = invalidCredentials ? <><a className='error'>Invalid Credentials</a><br/></> : undefined ;
 
     const handleEmailChange = ((e: any) => updateEmail(e.target.value));
     const handlePassChange = ((e: any) => updatePassword(e.target.value));
@@ -18,7 +21,10 @@ export const LoginComponent = ({firebaseService, setToken}:LoginComponentProps) 
     function checkEmailAuth(){
         firebaseService.setupEmailAuth(email, password)
             .then((result: boolean) => setToken(result))
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                console.log(err);
+                updateInvalid(true);
+            });
     }
 
     function checkAnonymousAuth(){
@@ -33,6 +39,7 @@ export const LoginComponent = ({firebaseService, setToken}:LoginComponentProps) 
             <input type="text" value={email} onChange={handleEmailChange} placeholder='Email'/><br/>
             <input type="password" value={password} onChange={handlePassChange} placeholder='Password'/><br/>
             <button className='admin' onClick={checkEmailAuth}>Submit</button><br/><br/>
+            {displayError}
             <button className='default' onClick={checkAnonymousAuth}>Continue As Guest</button>
         </div>
     )

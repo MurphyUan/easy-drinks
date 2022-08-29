@@ -1,11 +1,8 @@
-import { useState } from 'react';
 import { initializeApp } from 'firebase/app';
 import { 
     getAuth, 
-    signInWithPopup,
     signInAnonymously, 
     signInWithEmailAndPassword, 
-    GoogleAuthProvider, 
     Auth} from 'firebase/auth';
 import { getFirestore, collection, getDocs, doc } from 'firebase/firestore';
 
@@ -28,6 +25,10 @@ export class FirebaseService {
         this.firebaseApp = initializeApp(this.firebaseConfig);
         this.firebaseDB = getFirestore(this.firebaseApp);
         this.firebaseAuth = getAuth(this.firebaseApp);
+    }
+
+    public get FireBaseAuth() {
+        return this.firebaseAuth;
     }
 
     async setupAnonymouseAuth(){
@@ -60,5 +61,12 @@ export class FirebaseService {
                 })
                 .catch(err => reject(err));
         });
+    }
+
+    async getSingleCollectionItem(colName: string, uid: string){
+        return new Promise<any>((resolve, reject) => {
+            try{resolve(doc(this.firebaseDB, colName, uid))} 
+            catch (err){reject(err)} 
+        })
     }
 } 
