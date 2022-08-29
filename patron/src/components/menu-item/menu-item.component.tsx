@@ -5,21 +5,22 @@ type MenuItemProps = {
     name: string;
     description: string;
     price: number;
+    disabled: boolean;
     addItemToCart: () => void;
 }
 
-export const MenuItemComponent = ({imageUrl, name, description, price, addItemToCart}:MenuItemProps) => {
+export const MenuItemComponent = ({...props}:MenuItemProps) => {
 
     const callATIC = () => {
-        addItemToCart();
+        props.addItemToCart();
     }
 
     return(
         <button onClick={callATIC}>
-            <img src={imageUrl}></img>
-            <h5>{name}</h5>
-            <h5>{price}</h5>
-            <p>{description}</p>
+            <img src={props.imageUrl}></img>
+            <h5>{props.name}</h5>
+            <h5>{props.price}</h5>
+            <p>{props.description}</p>
         </button>
     )
 }
