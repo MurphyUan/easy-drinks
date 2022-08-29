@@ -1,5 +1,6 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import { FirebaseService } from '../../../services/firebase.service';
+import { BarComponent, BarProps } from '../../bar/bar.component';
 import { CartComponent } from '../../cart/cart.component';
 import { HeaderComponent } from '../../header/header.component';
 import { MenuComponent } from '../../menu/menu.component';
@@ -16,14 +17,17 @@ export const ClientDashBoardComponent = ({...props}:ClientDashBoardProps) => {
     const [data, setData] = useState<any>([]);
 
     const getData = useCallback(() => {
-        props.firebaseService.getCollection('restaurants')
+        props.firebaseService.getCollection('bars')
             .then((result) => {
+                console.log(result);
                 setData(result);
             })
             .catch((err) => {
                 console.log(err);
             });
     },[]);
+
+    useEffect(() => getData(), []);
 
     const showBar = () => {
         selectBar(true);
@@ -50,9 +54,10 @@ export const ClientDashBoardComponent = ({...props}:ClientDashBoardProps) => {
                 <button onClick={showBar}>Bar</button>
                 <button onClick={showMenu}>Menu</button>
                 <button onClick={showCart}>Cart</button>
+                <button onClick={getData}>Reload</button>
             </div>
             <div className='main-panel'>
-                {bar && <>Bars Here</>}
+                {bar && <BarComponent data={data}/>}
                 {menu && <MenuComponent/>}
                 {cart && <CartComponent/>}
             </div>

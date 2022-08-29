@@ -1,7 +1,7 @@
 import React , { useState } from 'react';
 
-type BarProps = {
-
+export type BarProps = {
+    data: any
 }
 
 export const BarComponent = ({...props}:BarProps) => {
