@@ -32,14 +32,14 @@ export const App = () => {
   //     })
   //     .catch(err => console.log(err));
   // }, [])
-  
-  let canAccess = auth ? <HeaderComponent/> : <LoginComponent setToken={checkAuth} firebaseService={firebaseService}/>
+
   let isAdmin = admin ? <AdminDashBoardComponent firebaseService={firebaseService}/> : <ClientDashBoardComponent firebaseService={firebaseService}/>
+  let canAccess = auth ? isAdmin : <LoginComponent setToken={checkAuth} firebaseService={firebaseService}/>
+  
 
   return (
     <div className="wrapper">
       { canAccess }
-      { isAdmin }
     </div>
   );
 }

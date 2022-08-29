@@ -6,8 +6,8 @@ type MenuProps = {
 
 export const MenuComponent = ({...props}: MenuProps) => {
 
-    
+
     return (
-        <></>
+        <div></div>
     )
 }
