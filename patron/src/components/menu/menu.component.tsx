@@ -1,5 +1,13 @@
+import React, { useState } from 'react';
 
+type MenuProps = {
 
-export const MenuComponent = () => {
+}
+
+export const MenuComponent = ({...props}: MenuProps) => {
+
     
+    return (
+        <></>
+    )
 }
