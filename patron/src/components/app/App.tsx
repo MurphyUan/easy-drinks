@@ -4,16 +4,19 @@ import { DashboardComponent } from '../dashboards/dashboard.component';
 import { LoginComponent } from '../login/login.component';
 import { HeaderComponent } from '../header/header.component';
 import { FirebaseService } from '../../services/firebase.service';
-
-type Restaurant = {
-  test: string
-}[]
+import { AdminDashBoardComponent } from '../dashboards/admin-dashboard/admin-dashboard';
+import { ClientDashBoardComponent } from '../dashboards/client-dashboard/client-dashboard';
 
 export const App = () => {
-  const [token, setToken] = useState(false);
-  const [restaurant, setRestaurant] = useState<Restaurant>([]);
+  const [auth, updateAuth] = useState(false);
+  const [admin, updateAdmin] = useState(false);
 
   const firebaseService = new FirebaseService();
+
+  function checkAuth(hasAuth: boolean, hasAdmin: boolean){
+    updateAuth(hasAuth);
+    updateAdmin(hasAdmin);
+  }
 
   // useMemo(() => {
   //   firebaseService.setupAnonymouseAuth()
@@ -30,12 +33,13 @@ export const App = () => {
   //     .catch(err => console.log(err));
   // }, [])
   
-  let canAccess = token ? <HeaderComponent/> : <LoginComponent setToken={setToken} firebaseService={firebaseService}/>
+  let canAccess = auth ? <HeaderComponent/> : <LoginComponent setToken={checkAuth} firebaseService={firebaseService}/>
+  let isAdmin = admin ? <AdminDashBoardComponent firebaseService={firebaseService}/> : <ClientDashBoardComponent firebaseService={firebaseService}/>
 
   return (
     <div className="wrapper">
       { canAccess }
-      {/* {restaurant.map(data => <li>{data.test}</li>)} */}
+      { isAdmin }
     </div>
   );
 }

@@ -9,6 +9,6 @@ export const AdminDashBoardComponent = ({...props}: AdminDashBoardProps) => {
 
     // Has Three Profiles: Menu, Restaurant Description, Orders
     return(
-        <></>
+        <>Admin Dashboard</>
     )
 }

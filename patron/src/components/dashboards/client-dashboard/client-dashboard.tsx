@@ -6,8 +6,8 @@ type ClientDashBoardProps = {
 }
 
 export const ClientDashBoardComponent = ({...props}:ClientDashBoardProps) => {
-    
+
     return (
-        <></>
+        <>Client Dashboard</>
     )
 }

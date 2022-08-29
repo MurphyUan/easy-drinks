@@ -4,7 +4,7 @@ import './login.component.scss';
 
 type LoginComponentProps = {
     firebaseService: FirebaseService;
-    setToken: (value: boolean) => void;
+    setToken: (value1: boolean, value2: boolean) => void;
 }
 
 export const LoginComponent = ({firebaseService, setToken}:LoginComponentProps) => {
@@ -20,7 +20,7 @@ export const LoginComponent = ({firebaseService, setToken}:LoginComponentProps) 
 
     function checkEmailAuth(){
         firebaseService.setupEmailAuth(email, password)
-            .then((result: boolean) => setToken(result))
+            .then((result: boolean) => setToken(result, true))
             .catch((err) => {
                 console.log(err);
                 updateInvalid(true);
@@ -29,7 +29,7 @@ export const LoginComponent = ({firebaseService, setToken}:LoginComponentProps) 
 
     function checkAnonymousAuth(){
         firebaseService.setupAnonymouseAuth()
-            .then((result: boolean) => setToken(result))
+            .then((result: boolean) => setToken(result, false))
             .catch((err) => console.log(err));
     }
 
