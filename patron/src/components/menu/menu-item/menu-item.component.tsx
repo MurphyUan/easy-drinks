@@ -16,7 +16,8 @@ export const MenuItemComponent = ({...props}:MenuItemProps) => {
     function addItemToCart(){
         if(props.cart && props.updateCartChange){
             props.cart.addToCart({
-                id: menuItem.id, 
+                id: menuItem.id,
+                name: menuItem.name,
                 price: menuItem.price, 
                 quantity: 1
             });

@@ -9,7 +9,6 @@ export interface BarEntity {
     name: string;
     description: string;
     menu: MenuItemEntity[];
-    orders: OrderItemEntity[];
 }
 
 export interface MenuItemEntity {
@@ -30,6 +29,7 @@ export interface OrderItemEntity {
 
 export interface ItemEntity {
     id: string;
+    name: string;
     price: number;
     quantity: number;
 }
