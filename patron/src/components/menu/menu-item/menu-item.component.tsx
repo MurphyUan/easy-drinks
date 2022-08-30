@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-type MenuItemProps = {
+export type MenuItemProps = {
     imageUrl: string;
     name: string;
     description: string;

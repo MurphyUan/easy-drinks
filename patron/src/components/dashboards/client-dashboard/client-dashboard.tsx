@@ -1,6 +1,7 @@
-import { useState, useCallback, useMemo, useEffect } from 'react';
-import { FirebaseService } from '../../../services/firebase.service';
-import { BarComponent, BarProps } from '../../bar/bar.component';
+import { useState, useCallback, useEffect } from 'react';
+import { FireBaseEntity, FireBaseModel } from '../../../models/firebase-data.model';
+import { FirebaseService} from '../../../services/firebase.service';
+import { BarComponent } from '../../bar/bar.component';
 import { CartComponent } from '../../cart/cart.component';
 import { HeaderComponent } from '../../header/header.component';
 import { MenuComponent } from '../../menu/menu.component';
@@ -14,20 +15,23 @@ export const ClientDashBoardComponent = ({...props}:ClientDashBoardProps) => {
     const [menu, selectMenu] = useState(false);
     const [cart, selectCart] = useState(false);
 
-    const [data, setData] = useState<any>([]);
+    let firebaseModel: FireBaseModel;
 
-    const getData = useCallback(() => {
+    const [data, setData] = useState<FireBaseEntity[]>([]);
+
+    const reloadData = useCallback(() => {
         props.firebaseService.getCollection('bars')
             .then((result) => {
-                console.log(result);
-                setData(result);
+                firebaseModel = new FireBaseModel(result);
+                setData(firebaseModel.Data);
+                console.log(data);
             })
             .catch((err) => {
                 console.log(err);
             });
     },[]);
 
-    useEffect(() => getData(), []);
+    useEffect(() => reloadData(), []);
 
     const showBar = () => {
         selectBar(true);
@@ -54,12 +58,10 @@ export const ClientDashBoardComponent = ({...props}:ClientDashBoardProps) => {
                 <button onClick={showBar}>Bar</button>
                 <button onClick={showMenu}>Menu</button>
                 <button onClick={showCart}>Cart</button>
-                <button onClick={getData}>Reload</button>
+                <button onClick={reloadData}>Reload</button>
             </div>
             <div className='main-panel'>
-                {bar && <BarComponent data={data}/>}
-                {menu && <MenuComponent/>}
-                {cart && <CartComponent/>}
+                { bar && <BarComponent bars={data} />}
             </div>
         </div>
     )

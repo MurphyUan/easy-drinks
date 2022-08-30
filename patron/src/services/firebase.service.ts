@@ -4,7 +4,8 @@ import {
     signInAnonymously, 
     signInWithEmailAndPassword, 
     Auth} from 'firebase/auth';
-import { getFirestore, collection, getDocs, doc } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, doc, CollectionReference, QueryDocumentSnapshot, DocumentData } from 'firebase/firestore';
+import { BarEntity } from '../models/firebase-data.model';
 
 export class FirebaseService {
 
@@ -53,11 +54,11 @@ export class FirebaseService {
     }
 
     async getCollection(colName: string){
-        return new Promise<any>((resolve, reject) => {
+        return new Promise<QueryDocumentSnapshot[]>((resolve, reject) => {
             getDocs(collection(this.firebaseDB, colName))
                 .then(result => {
                     console.log("Retrieving data from "+colName);
-                    resolve(result.docs.map(doc => doc.data()));
+                    resolve(result.docs);
                 })
                 .catch(err => reject(err));
         });
@@ -68,5 +69,9 @@ export class FirebaseService {
             try{resolve(doc(this.firebaseDB, colName, uid))} 
             catch (err){reject(err)} 
         })
+    }
+
+    SetBarID(param: string){
+
     }
 } 
