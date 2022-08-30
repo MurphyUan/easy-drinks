@@ -1,24 +1,19 @@
 import React, { useState } from "react";
 
 export type MenuItemProps = {
-    imageUrl: string;
+    imageUri: string;
     name: string;
     description: string;
     ingredients: string[];
     price: number;
     disabled: boolean;
-    addItemToCart: () => void;
 }
 
-export const MenuItemComponent = ({...props}:MenuItemProps, canBeDisabled: boolean) => {
-
-    const callATIC = () => {
-        props.addItemToCart();
-    }
+export const MenuItemComponent = ({...props}:MenuItemProps, addItemToCart: () => void, canBeDisabled: boolean) => {
 
     return(
-        <button onClick={callATIC}>
-            <img src={props.imageUrl}></img>
+        <button onClick={addItemToCart}>
+            <img src={props.imageUri}></img>
             <h5>{props.name}</h5>
             <h5>{props.price}</h5>
             <p>{props.description}</p>

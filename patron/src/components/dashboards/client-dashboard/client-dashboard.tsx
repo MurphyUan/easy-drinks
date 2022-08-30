@@ -11,9 +11,6 @@ type ClientDashBoardProps = {
 }
 
 export const ClientDashBoardComponent = ({...props}:ClientDashBoardProps) => {
-    const [bar, selectBar] = useState(true);
-    const [menu, selectMenu] = useState(false);
-    const [cart, selectCart] = useState(false);
 
     let firebaseModel: FireBaseModel;
 
@@ -24,7 +21,6 @@ export const ClientDashBoardComponent = ({...props}:ClientDashBoardProps) => {
             .then((result) => {
                 firebaseModel = new FireBaseModel(result);
                 setData(firebaseModel.Data);
-                console.log(data);
             })
             .catch((err) => {
                 console.log(err);
@@ -33,35 +29,14 @@ export const ClientDashBoardComponent = ({...props}:ClientDashBoardProps) => {
 
     useEffect(() => reloadData(), []);
 
-    const showBar = () => {
-        selectBar(true);
-        selectCart(false);
-        selectMenu(false);
-    }
-
-    const showCart = () => {
-        selectBar(false);
-        selectCart(true);
-        selectMenu(false);
-    }
-    
-    const showMenu = () => {
-        selectBar(false);
-        selectCart(false);
-        selectMenu(true);
-    }
-
     return (
         <div>
             <HeaderComponent />
             <div className='front-panel'>
-                <button onClick={showBar}>Bar</button>
-                <button onClick={showMenu}>Menu</button>
-                <button onClick={showCart}>Cart</button>
                 <button onClick={reloadData}>Reload</button>
             </div>
             <div className='main-panel'>
-                { bar && <BarComponent bars={data} />}
+                <BarComponent bars={data} />
             </div>
         </div>
     )

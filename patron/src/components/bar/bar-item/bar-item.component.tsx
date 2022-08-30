@@ -4,23 +4,23 @@ import { MenuItemProps } from "../../menu/menu-item/menu-item.component";
 import { Order } from "../../orders/orders.component";
 import './bar-item.component.scss';
 
-export type BarItemProps = {
-    name: string;
-    description: string;
-    menu: MenuItemProps[];
-    orders: Order;
+interface BarItemProps {
+    base: FireBaseEntity;
+    selectBar: (param: string) => void;
 }
 
-export const BarItemComponent = ({...bar}: FireBaseEntity , selectBar: (param: string) => void) => {
+export const BarItemComponent = ({...item}: BarItemProps ) => {
+
+    const props = item.base.bar;
 
     function passArgs(){
-        selectBar(bar.id);
+        item.selectBar(item.base.id);
     }
 
     return (
         <div className="bar-item">
-            <a>{bar.bar.name}</a>
-            <p>{bar.bar.description}</p>
+            <a>{props.name}</a>
+            <p>{props.description}</p>
             <button onClick={passArgs}>Select Bar</button>
         </div>
     )

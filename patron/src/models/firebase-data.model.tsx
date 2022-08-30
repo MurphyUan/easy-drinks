@@ -8,7 +8,7 @@ export interface FireBaseEntity {
 export interface BarEntity {
     name: string;
     description: string;
-    menu_items: MenuItemEntity[];
+    menu: MenuItemEntity[];
     orders: OrderItemEntity[];
 }
 
