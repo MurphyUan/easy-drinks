@@ -16,21 +16,6 @@ export const App = () => {
     updateAdmin(hasAdmin);
   }
 
-  // useMemo(() => {
-  //   firebaseService.setupAnonymouseAuth()
-  //     .then(result => setToken(result))
-  //     .catch(() => setToken(false));
-  // }, []);
-
-  // useMemo(() => {
-  //   firebaseService.getCollection('restaurants')
-  //     .then(result => {
-  //       console.log(result)
-  //       setRestaurant(result)
-  //     })
-  //     .catch(err => console.log(err));
-  // }, [])
-
   let isAdmin = admin ? <AdminDashBoardComponent firebaseService={firebaseService}/> : <ClientDashBoardComponent firebaseService={firebaseService}/>
   let mainDisplay = auth ? isAdmin : <LoginComponent setToken={checkAuth} firebaseService={firebaseService}/>
   

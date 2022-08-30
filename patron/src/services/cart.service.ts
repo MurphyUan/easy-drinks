@@ -1,9 +1,7 @@
-type CartProps = {
-
-};
+import { ItemEntity } from "../models/firebase-data.model";
 
 export class CartService {
-    private cart: CartProps[];
+    private cart: ItemEntity[];
 
     constructor(){
         this.cart = [];
@@ -17,12 +15,22 @@ export class CartService {
         this.cart = [];
     }
 
-    public addToCart(item: CartProps){
+    public addToCart(item: ItemEntity){
+        const cartItem = this.cart.findIndex(c => c.id === item.id)
+        if(cartItem >= 0){
+            this.cart[cartItem].quantity += 1;
+            return;
+        }
         this.cart.push(item);
     }
 
-    public removeFromCart(index: number){
-        if(this.cart.length < index) return;
-        this.cart.splice(index, 1);
+    public removeFromCart(item: ItemEntity){
+        const cartItem = this.cart.findIndex(c => c.id == item.id)
+        if(cartItem < 0) return;
+        if(cartItem >= 0 && this.cart[cartItem].quantity > 1){
+            this.cart[cartItem].quantity -= 1;
+            return;
+        }
+        this.cart.splice(cartItem, 1);
     }
 }

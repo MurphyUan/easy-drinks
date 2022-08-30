@@ -1,13 +1,26 @@
-export type CartItemProps = {
-    name: string;
-    quantity: number;
-    price: number;
+import { useEffect, useState } from "react";
+import { ItemEntity } from "../../../models/firebase-data.model";
+import { CartService } from "../../../services/cart.service";
+
+interface CartitemProps {
+    cart: CartService;
+    cartItem: ItemEntity;
+    updateCartChange: () => void; 
 }
 
-export const CartItemComponent = ({...props}:CartItemProps) => {
+export const CartItemComponent = ({...props}:CartitemProps) => {
+
+    const item = props.cartItem;
+
+    function removeItemFromCart(){
+        props.cart.removeFromCart(item);
+        props.updateCartChange();
+    }
+
     return(
         <div>
-            <a>{props.name} x{props.quantity}: €{props.price}</a>
+            <a>{item.id} x{item.quantity}: €{item.price}</a>
+            <button onClick={removeItemFromCart}></button>
         </div>
     )
 }

@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import { FireBaseEntity, FireBaseModel } from '../../../models/firebase-data.model';
+import { CartService } from '../../../services/cart.service';
 import { FirebaseService} from '../../../services/firebase.service';
 import { BarComponent } from '../../bar/bar.component';
 import { CartComponent } from '../../cart/cart.component';
@@ -13,6 +14,7 @@ type ClientDashBoardProps = {
 export const ClientDashBoardComponent = ({...props}:ClientDashBoardProps) => {
 
     let firebaseModel: FireBaseModel;
+    const cartService = new CartService();
 
     const [data, setData] = useState<FireBaseEntity[]>([]);
 
@@ -27,7 +29,9 @@ export const ClientDashBoardComponent = ({...props}:ClientDashBoardProps) => {
             });
     },[]);
 
-    useEffect(() => reloadData(), []);
+    useEffect(() => {
+        reloadData();
+    }, []);
 
     return (
         <div>
@@ -36,7 +40,7 @@ export const ClientDashBoardComponent = ({...props}:ClientDashBoardProps) => {
                 <button onClick={reloadData}>Reload</button>
             </div>
             <div className='main-panel'>
-                <BarComponent bars={data} />
+                <BarComponent bars={data} cart={cartService} firebase={props.firebaseService}/>
             </div>
         </div>
     )

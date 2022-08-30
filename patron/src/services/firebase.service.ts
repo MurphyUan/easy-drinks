@@ -4,8 +4,8 @@ import {
     signInAnonymously, 
     signInWithEmailAndPassword, 
     Auth} from 'firebase/auth';
-import { getFirestore, collection, getDocs, doc, CollectionReference, QueryDocumentSnapshot, DocumentData } from 'firebase/firestore';
-import { BarEntity } from '../models/firebase-data.model';
+import { getFirestore, collection, getDocs, doc, QueryDocumentSnapshot } from 'firebase/firestore';
+import { ItemEntity } from '../models/firebase-data.model';
 
 export class FirebaseService {
 
@@ -53,6 +53,10 @@ export class FirebaseService {
         })
     }
 
+    publishCartToOrder(items: ItemEntity[]){
+        
+    }
+
     async getCollection(colName: string){
         return new Promise<QueryDocumentSnapshot[]>((resolve, reject) => {
             getDocs(collection(this.firebaseDB, colName))
@@ -69,9 +73,5 @@ export class FirebaseService {
             try{resolve(doc(this.firebaseDB, colName, uid))} 
             catch (err){reject(err)} 
         })
-    }
-
-    SetBarID(param: string){
-
     }
 } 
