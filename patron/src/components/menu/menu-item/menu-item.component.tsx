@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Card, Button } from "react-bootstrap";
 import { MenuItemEntity } from "../../../models/shared-data.model";
 import { CartService } from "../../../services/cart.service";
 import './menu-item.component.scss';
@@ -27,16 +28,14 @@ export const MenuItemComponent = ({...props}:MenuItemProps) => {
     }
 
     return(
-
-        <div className="menu-item">
-                <div className="left">
-                    <img src={menuItem.imageUri}></img>
-                </div>
-                <div className="right">
-                    <h3>{menuItem.name} €{menuItem.price}</h3>
-                    <p>{menuItem.description}</p>
-                    <button onClick={addItemToCart}>Add Item</button>
-                </div>
-        </div>
+        <Card style={{width: '18rem'}}>
+            <Card.Img variant="top" src={menuItem.imageUri}/>
+            <Card.Body>
+                <Card.Body>
+                    <Card.Title>{menuItem.name} €{menuItem.price}</Card.Title>
+                    <Button onClick={addItemToCart}>Add Item</Button>
+                </Card.Body>
+            </Card.Body>
+        </Card>
     )
 }

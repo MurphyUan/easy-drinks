@@ -28,7 +28,7 @@ export const BarComponent = ({bars, cart, firebase}:Bars) => {
 
     return (
         <div>
-            <Accordion defaultActiveKey="0" flush>
+            <Accordion defaultActiveKey={['0', '1', '2']} flush alwaysOpen>
                 <Accordion.Item eventKey='0'>
                     <Accordion.Header>Bars</Accordion.Header>
                     <Accordion.Body>
