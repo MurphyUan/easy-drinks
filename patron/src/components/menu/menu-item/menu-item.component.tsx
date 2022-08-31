@@ -26,10 +26,10 @@ export const MenuItemComponent = ({...props}:MenuItemProps) => {
     }
 
     return(
+        
         <button onClick={addItemToCart}>
             <img src={menuItem.imageUri}></img>
-            <h5>{menuItem.name}</h5>
-            <h5>{menuItem.price}</h5>
+            <h3>{menuItem.name} €{menuItem.price}</h3>
             <p>{menuItem.description}</p>
         </button>
     )
