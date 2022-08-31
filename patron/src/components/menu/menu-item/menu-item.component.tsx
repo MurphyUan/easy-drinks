@@ -4,7 +4,7 @@ import { CartService } from "../../../services/cart.service";
 
 export type MenuItemProps = {
     menuEntity: MenuItemEntity;
-    canBeDisabled: boolean;
+    canBeDisabled?: boolean;
     cart?: CartService;
     updateCartChange?: () => void;
 }
@@ -23,7 +23,6 @@ export const MenuItemComponent = ({...props}:MenuItemProps) => {
             });
             props.updateCartChange();
         }
-        
     }
 
     return(

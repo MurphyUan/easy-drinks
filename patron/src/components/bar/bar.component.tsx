@@ -41,7 +41,8 @@ export const BarComponent = ({bars, cart, firebase}:Bars) => {
                         cart={cart} 
                         cartChange={cartChange}
                         updateCartChange={forceCartChange}
-                        firebase={firebase}/>
+                        firebase={firebase}
+                        selectedBar={selectedBar}/>
                 </div>
             }
         </div>

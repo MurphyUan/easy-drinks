@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { FireBaseEntity } from "../../../models/firebase-data.model";
-import { MenuItemProps } from "../../menu/menu-item/menu-item.component";
-import { Order } from "../../orders/orders.component";
 import './bar-item.component.scss';
 
 interface BarItemProps {

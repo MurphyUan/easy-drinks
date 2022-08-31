@@ -11,6 +11,12 @@ export class CartService {
         return this.cart;
     }
 
+    public getTotal(){
+        return this.getCart().reduce((sum, obj) => {
+            return sum + (obj.price * obj.quantity);
+        }, 0);
+    }
+
     public clearCart(){
         this.cart = [];
     }
@@ -25,7 +31,7 @@ export class CartService {
     }
 
     public removeFromCart(item: ItemEntity){
-        const cartItem = this.cart.findIndex(c => c.id == item.id)
+        const cartItem = this.cart.findIndex(c => c.id === item.id)
         if(cartItem < 0) return;
         if(cartItem >= 0 && this.cart[cartItem].quantity > 1){
             this.cart[cartItem].quantity -= 1;

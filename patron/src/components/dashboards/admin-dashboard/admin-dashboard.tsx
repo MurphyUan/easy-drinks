@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { BarEntity, FireBaseEntity, FireBaseModel } from '../../../models/firebase-data.model';
 import { FirebaseService } from '../../../services/firebase.service';
 import { HeaderComponent } from '../../header/header.component';
+import { MenuComponent } from '../../menu/menu.component';
+import { OrderComponent } from '../../orders/orders.component';
 
 type AdminDashBoardProps = {
     firebaseService: FirebaseService;
@@ -8,18 +11,52 @@ type AdminDashBoardProps = {
 
 export const AdminDashBoardComponent = ({...props}: AdminDashBoardProps) => {
 
-    // Has Three Profiles: Menu, Restaurant Description, Orders
+    let firebaseModel: FireBaseModel;
+    const firebase = props.firebaseService;
+
+    const [data, setData] = useState<BarEntity>();
+    const [displayMenu, updateDisplayMenu] = useState(true);
+    const [displayOrders, updateDisplayOrders] = useState(false);
+    
+
+    const UpdateDisplayMenu = () => {
+        updateDisplayMenu(true);
+        updateDisplayOrders(false);
+    }
+
+    const UpdateDisplayOrders = () => {
+        updateDisplayMenu(false);
+        updateDisplayOrders(true);
+    }
+
+    const displayData = () => {
+        console.log(data);
+    }
+
+    const reloadData = useCallback(() => {
+        firebase.getSingleCollection('bars', firebase.FireBaseAuth)
+            .then((result) => {
+                firebaseModel = new FireBaseModel(result)
+                setData(firebaseModel.Data[0].bar);
+            })
+            .catch((err) => console.log(err, 'From ReloadData'));
+    },[]);
+
+    useEffect(() => reloadData(),[]);
+
     return(
-        <>
+        <div>
+            <HeaderComponent />
             <div className='front-panel'>
-                <HeaderComponent/>
+                <button onClick={UpdateDisplayMenu}>Menu</button>
+                <button onClick={UpdateDisplayOrders}>Orders</button>
+                <button onClick={reloadData}>Reload</button>
+                <button onClick={displayData}>Log</button>
             </div>
-            <div className='left-panel'>
-                
-            </div>
-            <div className='right-panel'>
-                
+            <div className='main-panel'>
+                { displayMenu && <MenuComponent menu={data?.menu}/>}
+                { displayOrders && <OrderComponent firebaseService={firebase}/>}
             </div>        
-        </>
+        </div>
     )
 }

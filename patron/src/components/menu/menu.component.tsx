@@ -4,9 +4,10 @@ import { CartService } from '../../services/cart.service';
 import { MenuItemComponent } from './menu-item/menu-item.component';
 
 interface MenuProps {
-    menu: MenuItemEntity[];
-    cart: CartService;
-    updateCartChange: () => void;
+    menu?: MenuItemEntity[];
+    canBeDisabled?: boolean;
+    cart?: CartService;
+    updateCartChange?: () => void;
 }
 
 export const MenuComponent = ({...props}: MenuProps) => {
@@ -20,7 +21,7 @@ export const MenuComponent = ({...props}: MenuProps) => {
                     <MenuItemComponent 
                         key={menuItem.id} 
                         menuEntity={menuItem} 
-                        canBeDisabled={false} 
+                        canBeDisabled={props.canBeDisabled} 
                         cart={props.cart}
                         updateCartChange={props.updateCartChange}/>
                 )}

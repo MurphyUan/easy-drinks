@@ -3,15 +3,22 @@ import {
     getAuth, 
     signInAnonymously, 
     signInWithEmailAndPassword, 
-    Auth} from 'firebase/auth';
-import { getFirestore, collection, getDocs, doc, QueryDocumentSnapshot } from 'firebase/firestore';
-import { ItemEntity } from '../models/firebase-data.model';
+    Auth, onAuthStateChanged} from 'firebase/auth';
+import { 
+    getFirestore, 
+    collection, 
+    getDocs, doc, 
+    QueryDocumentSnapshot, DocumentSnapshot,
+    addDoc, getDoc, DocumentData } from 'firebase/firestore';
+import { ItemEntity, OrderItemEntity } from '../models/firebase-data.model';
 
 export class FirebaseService {
 
     private firebaseApp: any;
     private firebaseDB: any;
     private firebaseAuth: Auth;
+
+    private firebaseUID: string;
 
     private firebaseConfig = {
         apiKey: "AIzaSyDt7wQ2GpdNcyTKvOKMJqI51I8Jhs-yynY",
@@ -23,13 +30,19 @@ export class FirebaseService {
     };
     
     constructor(){
+        this.firebaseUID = '';
         this.firebaseApp = initializeApp(this.firebaseConfig);
         this.firebaseDB = getFirestore(this.firebaseApp);
         this.firebaseAuth = getAuth(this.firebaseApp);
+
+        onAuthStateChanged(this.firebaseAuth, user => {
+            if(user)
+                this.firebaseUID = user.uid
+        });
     }
 
     public get FireBaseAuth() {
-        return this.firebaseAuth;
+        return this.firebaseUID;
     }
 
     async setupAnonymouseAuth(){
@@ -53,8 +66,12 @@ export class FirebaseService {
         })
     }
 
-    publishCartToOrder(items: ItemEntity[]){
-        
+    async publishCartToOrder(cart: OrderItemEntity, barUID: string){
+        return new Promise((resolve, reject) => {
+            addDoc(collection(this.firebaseDB, `bars/${barUID}/orders`), cart)
+                .then(() => resolve(true))
+                .catch(err => console.log(err))
+        });
     }
 
     async getCollection(colName: string){
@@ -68,10 +85,13 @@ export class FirebaseService {
         });
     }
 
-    async getSingleCollectionItem(colName: string, uid: string){
-        return new Promise<any>((resolve, reject) => {
-            try{resolve(doc(this.firebaseDB, colName, uid))} 
-            catch (err){reject(err)} 
+    async getSingleCollection(colName: string, uid: string){
+        return new Promise<DocumentSnapshot>((resolve, reject) => {
+            getDoc(doc(this.firebaseDB, colName, uid))
+                .then(result => {
+                    resolve(result)
+                })
+                .catch(err => reject(err));
         })
     }
 } 

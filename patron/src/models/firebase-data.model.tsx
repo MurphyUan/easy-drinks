@@ -22,7 +22,7 @@ export interface MenuItemEntity {
 }
 
 export interface OrderItemEntity {
-    items: any[];
+    items: ItemEntity[];
     location: number;
     total: number;
 }
@@ -38,9 +38,10 @@ export class FireBaseModel {
     private data: FireBaseEntity[];
     private barID: string;
 
-    constructor(firebaseData: DocumentData[]){
+    constructor(firebaseData: DocumentData | DocumentData[]){
         this.barID = '';
-        this.data = firebaseData.map(doc => {
+        firebaseData = (!Array.isArray(firebaseData)) ? [firebaseData] : firebaseData ;
+        this.data = firebaseData.map((doc: DocumentData) => {
             return {
                 id: doc.id,
                 bar: doc.data()
