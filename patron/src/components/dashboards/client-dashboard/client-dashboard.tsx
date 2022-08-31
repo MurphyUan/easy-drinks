@@ -24,7 +24,6 @@ export const ClientDashBoardComponent = ({...props}:ClientDashBoardProps) => {
             .then((result) => {
                 firebaseModel = new FireBaseModel(result);
                 setData(firebaseModel.Data);
-                console.log(firebaseModel.Data);
             })
             .catch((err) => {
                 console.log(err);

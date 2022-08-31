@@ -30,10 +30,6 @@ export const AdminDashBoardComponent = ({...props}: AdminDashBoardProps) => {
         updateDisplayOrders(true);
     }
 
-    const displayData = () => {
-        console.log(data);
-    }
-
     const reloadData = useCallback(() => {
         firebase.getSingleCollection('bars', firebase.FireBaseAuth)
             .then((result) => {
@@ -52,7 +48,6 @@ export const AdminDashBoardComponent = ({...props}: AdminDashBoardProps) => {
                 <button onClick={UpdateDisplayMenu}>Menu</button>
                 <button onClick={UpdateDisplayOrders}>Orders</button>
                 <button onClick={reloadData}>Reload</button>
-                <button onClick={displayData}>Log</button>
             </div>
             <div className='main-panel'>
                 { displayMenu && <MenuComponent menu={data?.menu}/>}

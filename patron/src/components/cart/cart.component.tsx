@@ -32,7 +32,6 @@ export const CartComponent = ({...props}: CartProps) => {
 
     useEffect(() => {
         updateCurrentCart(props.cart.getCart());
-        console.log("Cart Updated", currentCart);
     },[props.cartChange]);
 
     return (

@@ -1,9 +1,9 @@
 import { DocumentData } from "firebase/firestore";
-import { OrderItemEntity } from "./shared-data.model";
+import { OrderEntity } from "./shared-data.model";
 
 
 export class OrderModel {
-    private data: OrderItemEntity[];
+    private data: OrderEntity[];
 
     constructor(newData: DocumentData | DocumentData[]){
         newData = ( !Array.isArray(newData)) ? [newData] : newData;
@@ -15,7 +15,7 @@ export class OrderModel {
         })
     }
 
-    get Data(): OrderItemEntity[] {
+    get Data(): OrderEntity[] {
         return this.data;
     }
 }

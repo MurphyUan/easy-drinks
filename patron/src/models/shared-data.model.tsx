@@ -19,6 +19,11 @@ export interface MenuItemEntity {
     price: number;
 }
 
+export interface OrderEntity {
+    id: string;
+    data: OrderItemEntity;
+}
+
 export interface OrderItemEntity {
     items: ItemEntity[];
     location: number;
