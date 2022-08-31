@@ -4,9 +4,8 @@ import { FireBaseModel } from '../../../models/firebase-data.model';
 import { CartService } from '../../../services/cart.service';
 import { FirebaseService} from '../../../services/firebase.service';
 import { BarComponent } from '../../bar/bar.component';
-import { CartComponent } from '../../cart/cart.component';
 import { HeaderComponent } from '../../header/header.component';
-import { MenuComponent } from '../../menu/menu.component';
+import './client-dashboard.component.scss'
 
 type ClientDashBoardProps = {
     firebaseService: FirebaseService;
@@ -35,7 +34,7 @@ export const ClientDashBoardComponent = ({...props}:ClientDashBoardProps) => {
     }, []);
 
     return (
-        <div>
+        <div className='dashboard'>
             <HeaderComponent />
             <div className='front-panel'>
                 <button onClick={reloadData}>Reload</button>

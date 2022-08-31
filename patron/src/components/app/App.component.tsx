@@ -2,8 +2,8 @@ import { useState } from 'react';
 import './App.scss';
 import { LoginComponent } from '../login/login.component';
 import { FirebaseService } from '../../services/firebase.service';
-import { AdminDashBoardComponent } from '../dashboards/admin-dashboard/admin-dashboard';
-import { ClientDashBoardComponent } from '../dashboards/client-dashboard/client-dashboard';
+import { AdminDashBoardComponent } from '../dashboards/admin-dashboard/admin-dashboard.component';
+import { ClientDashBoardComponent } from '../dashboards/client-dashboard/client-dashboard.component';
 
 export const App = () => {
   const [auth, updateAuth] = useState(false);
