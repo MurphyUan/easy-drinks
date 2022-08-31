@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Form, Button } from 'react-bootstrap';
 import { FirebaseService } from '../../services/firebase.service';
 import './login.component.scss';
 
@@ -15,8 +16,14 @@ export const LoginComponent = ({firebaseService, setToken}:LoginComponentProps) 
 
     const displayError = invalidCredentials ? <><a className='error'>Invalid Credentials</a><br/></> : undefined ;
 
-    const handleEmailChange = ((e: any) => updateEmail(e.target.value));
-    const handlePassChange = ((e: any) => updatePassword(e.target.value));
+    const handleEmailChange = ((e: any) => {
+        updateEmail(e.target.value)
+        updateInvalid(false);
+    });
+    const handlePassChange = ((e: any) => {
+        updatePassword(e.target.value)
+        updateInvalid(false);
+    });
 
     function checkEmailAuth(){
         firebaseService.setupEmailAuth(email, password)
@@ -34,13 +41,30 @@ export const LoginComponent = ({firebaseService, setToken}:LoginComponentProps) 
     }
 
     return(
-        <div className='login wrapper'>
-            <h1>Sign in</h1>
-            <input type="text" value={email} onChange={handleEmailChange} placeholder='Email'/><br/>
-            <input type="password" value={password} onChange={handlePassChange} placeholder='Password'/><br/>
-            <button className='admin' onClick={checkEmailAuth}>Submit</button><br/><br/>
-            {displayError}
-            <button className='default' onClick={checkAnonymousAuth}>Continue As Guest</button>
+        
+        <div className='page'>
+            <h1>Sign In</h1>
+            <Form>
+                <Form.Group className='mb-3'>
+                    <Form.Label>Email:</Form.Label>
+                    <Form.Control
+                        type='email'
+                        placeholder='name@example.com'
+                        onChange={handleEmailChange}
+                        value={email}/>
+                </Form.Group>
+                <Form.Group className='mb-3'>
+                    <Form.Label></Form.Label>
+                    <Form.Control
+                        type='password'
+                        placeholder='***********'
+                        onChange={handlePassChange}
+                        value={password}/>
+                </Form.Group>
+                <Button onClick={checkEmailAuth}>Submit</Button><br/>
+                {displayError}<br/>
+                <Button onClick={checkAnonymousAuth}>Continue as Guest</Button>
+            </Form>
         </div>
     )
 }

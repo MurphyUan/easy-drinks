@@ -1,0 +1,47 @@
+.menu-item{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+
+    padding: 12px 12px 15px;
+    border-bottom: 1px solid gainsboro;
+
+    .left{
+        width: 84px;
+        border: 1px solid gainsboro;
+        background-color: gainsboro;
+        float: left;
+        margin-right: 12px;
+        overflow: hidden;
+        position: relative;
+        border-radius: 3px;
+        text-align: center;
+
+        img {
+            float: left;
+            overflow: hidden;
+            width: inherit;
+            height: 120px;
+            min-width: inherit;
+            margin-right: inherit;
+        }
+    }
+
+    .right{
+        display: flex;
+        flex-wrap: wrap;
+        flex: 1;
+        margin-top: 1px;
+        margin-right: 8px;
+        min-width: 0;
+
+        flex-direction: column;
+    }
+
+    
+}
+
+img{
+    width: 50%;
+    height: 90%;
+}

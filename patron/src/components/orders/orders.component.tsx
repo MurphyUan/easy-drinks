@@ -1,8 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { OrderEntity, OrderItemEntity } from '../../models/shared-data.model';
+import { ItemEntity, OrderEntity, OrderItemEntity } from '../../models/shared-data.model';
 import { OrderModel } from '../../models/order-data.model';
 import { FirebaseService } from '../../services/firebase.service';
 import { OrderItemComponent } from './order-item/order-item.component';
+import { Alert, Button } from 'react-bootstrap';
+import './orders.component.scss';
 
 type OrderProps = {
     firebaseService: FirebaseService;
@@ -34,6 +36,12 @@ export const OrderComponent = ({...props}:OrderProps) => {
             .catch( err => console.log(err));
     }, []);
 
+    const calculateTotal = (items: ItemEntity[]) => {
+        return items.reduce((sum, obj) => {
+            return sum + (obj.price * obj.quantity);
+        }, 0);
+    }
+
     useEffect(() => {
         getOrders();
     },[]);
@@ -43,11 +51,17 @@ export const OrderComponent = ({...props}:OrderProps) => {
             { 
                 orders.map(order => {
                     return (
-                        <div>
-                            {order.data.items.map( item => {
-                                return <OrderItemComponent key={item.id} {...item}/>
-                            })}
-                            <button onClick={e => completeOrder(e, order.id)}>Complete Order</button>
+                        <div className='row'>
+                            <Alert variant='secondary' style={{width: '18rem'}}>
+                                {order.data.items.map( item => {
+                                    return (<div>
+                                        <OrderItemComponent key={item.id} {...item}/> <br/>
+                                    </div>)
+                                })}
+                                <br/>
+                                Total: €{calculateTotal(order.data.items)}
+                                <Button onClick={e => completeOrder(e, order.id)}>Complete Order</Button>
+                            </Alert>
                         </div>
                     )
                 })
