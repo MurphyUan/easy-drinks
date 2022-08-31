@@ -10,8 +10,8 @@ type LoginComponentProps = {
 
 export const LoginComponent = ({firebaseService, setToken}:LoginComponentProps) => {
 
-    const [ email, updateEmail] = useState('uan.murphy@hotmail.com');
-    const [ password, updatePassword] = useState('Test1234!');
+    const [ email, updateEmail] = useState('');
+    const [ password, updatePassword] = useState('');
     const [ invalidCredentials, updateInvalid] = useState(false);
 
     const displayError = invalidCredentials ? <><a className='error'>Invalid Credentials</a><br/></> : undefined ;
