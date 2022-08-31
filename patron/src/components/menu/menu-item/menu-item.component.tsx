@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { MenuItemEntity } from "../../../models/shared-data.model";
 import { CartService } from "../../../services/cart.service";
+import './menu-item.component.scss';
 
 export type MenuItemProps = {
     menuEntity: MenuItemEntity;
@@ -26,11 +27,16 @@ export const MenuItemComponent = ({...props}:MenuItemProps) => {
     }
 
     return(
-        
-        <button onClick={addItemToCart}>
-            <img src={menuItem.imageUri}></img>
-            <h3>{menuItem.name} €{menuItem.price}</h3>
-            <p>{menuItem.description}</p>
-        </button>
+
+        <div className="menu-item">
+                <div className="left">
+                    <img src={menuItem.imageUri}></img>
+                </div>
+                <div className="right">
+                    <h3>{menuItem.name} €{menuItem.price}</h3>
+                    <p>{menuItem.description}</p>
+                    <button onClick={addItemToCart}>Add Item</button>
+                </div>
+        </div>
     )
 }

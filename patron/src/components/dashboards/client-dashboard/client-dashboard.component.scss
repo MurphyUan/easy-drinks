@@ -1,6 +1,14 @@
 .dashboard {
     
     .front-panel {
-        background-color: purple;
+        margin: 5px auto;
+        text-align: center;
+    }
+
+    button {
+        border: 1px solid gainsboro;
+        background-color: gainsboro;
+        
+        border-radius: 0.5rem;
     }
 }

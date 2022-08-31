@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './App.scss';
+import './App.component.scss';
 import { LoginComponent } from '../login/login.component';
 import { FirebaseService } from '../../services/firebase.service';
 import { AdminDashBoardComponent } from '../dashboards/admin-dashboard/admin-dashboard.component';
