@@ -20,7 +20,7 @@ export const CartItemComponent = ({...props}:CartitemProps) => {
     return(
         <div>
             <a>{item.id}/{item.name} x{item.quantity}: €{item.price}</a>
-            <button onClick={removeItemFromCart}>X</button>
+            <button onClick={removeItemFromCart}>-</button>
         </div>
     )
 }
