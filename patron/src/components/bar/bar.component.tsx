@@ -5,6 +5,7 @@ import { FirebaseService } from '../../services/firebase.service';
 import { CartComponent } from '../cart/cart.component';
 import { MenuComponent } from '../menu/menu.component';
 import { BarItemComponent} from './bar-item/bar-item.component';
+import Accordion from 'react-bootstrap/Accordion';
 
 interface Bars {
     bars: FireBaseEntity[];
@@ -27,24 +28,41 @@ export const BarComponent = ({bars, cart, firebase}:Bars) => {
 
     return (
         <div>
-            {bars.map((bar: FireBaseEntity) => {
-                return <BarItemComponent key={bar.id} base={bar} selectBar={updateSelectedBar} />
-            })}
-
-            { selectedBar !== '' && 
-                <div>
-                    <MenuComponent 
-                        menu={menu} 
-                        cart={cart} 
-                        updateCartChange={forceCartChange}/>
-                    <CartComponent 
-                        cart={cart} 
-                        cartChange={cartChange}
-                        updateCartChange={forceCartChange}
-                        firebase={firebase}
-                        selectedBar={selectedBar}/>
-                </div>
-            }
+            <Accordion defaultActiveKey="0" flush>
+                <Accordion.Item eventKey='0'>
+                    <Accordion.Header>Bars</Accordion.Header>
+                    <Accordion.Body>
+                        {bars.map((bar: FireBaseEntity) => {
+                            return <BarItemComponent key={bar.id} base={bar} selectBar={updateSelectedBar} />
+                        })}
+                    </Accordion.Body>
+                </Accordion.Item>
+                { selectedBar !== '' && 
+                    <div>
+                        <Accordion.Item eventKey='1'>
+                            <Accordion.Header>Menu</Accordion.Header>
+                            <Accordion.Body>
+                                <MenuComponent 
+                                    menu={menu} 
+                                    cart={cart} 
+                                    updateCartChange={forceCartChange}/>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                        <Accordion.Item eventKey='2'>
+                            <Accordion.Header>Cart</Accordion.Header>
+                            <Accordion.Body>
+                                <CartComponent 
+                                    cart={cart} 
+                                    cartChange={cartChange}
+                                    updateCartChange={forceCartChange}
+                                    firebase={firebase}
+                                    selectedBar={selectedBar}/>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                    </div>
+                }
+                
+            </Accordion>
         </div>
     )
 }

@@ -4,6 +4,7 @@ import { LoginComponent } from '../login/login.component';
 import { FirebaseService } from '../../services/firebase.service';
 import { AdminDashBoardComponent } from '../dashboards/admin-dashboard/admin-dashboard.component';
 import { ClientDashBoardComponent } from '../dashboards/client-dashboard/client-dashboard.component';
+import { HeaderComponent } from '../header/header.component';
 
 export const App = () => {
   const [auth, updateAuth] = useState(false);
