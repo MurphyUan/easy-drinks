@@ -1,4 +1,4 @@
-import { ItemEntity } from "../models/firebase-data.model";
+import { ItemEntity } from "../models/shared-data.model";
 
 export class CartService {
     private cart: ItemEntity[];

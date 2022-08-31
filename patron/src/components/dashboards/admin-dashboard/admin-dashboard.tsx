@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { BarEntity, FireBaseEntity, FireBaseModel } from '../../../models/firebase-data.model';
+import { FireBaseModel } from '../../../models/firebase-data.model';
+import { BarEntity } from '../../../models/shared-data.model';
 import { FirebaseService } from '../../../services/firebase.service';
 import { HeaderComponent } from '../../header/header.component';
 import { MenuComponent } from '../../menu/menu.component';

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ItemEntity } from "../../../models/firebase-data.model";
+import { ItemEntity } from "../../../models/shared-data.model";
 import { CartService } from "../../../services/cart.service";
 
 interface CartitemProps {

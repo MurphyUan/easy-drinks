@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import './cart.component.scss';
 import { CartItemComponent } from './cart-items/cart-items.component';
 import { CartService } from '../../services/cart.service';
-import { ItemEntity, OrderItemEntity } from '../../models/firebase-data.model';
+import { ItemEntity, OrderItemEntity } from '../../models/shared-data.model';
 import { FirebaseService } from '../../services/firebase.service';
 
 type CartProps = {

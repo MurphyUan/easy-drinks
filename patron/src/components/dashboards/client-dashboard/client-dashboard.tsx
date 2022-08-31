@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
-import { FireBaseEntity, FireBaseModel } from '../../../models/firebase-data.model';
+import { FireBaseEntity } from '../../../models/shared-data.model';
+import { FireBaseModel } from '../../../models/firebase-data.model';
 import { CartService } from '../../../services/cart.service';
 import { FirebaseService} from '../../../services/firebase.service';
 import { BarComponent } from '../../bar/bar.component';
@@ -23,6 +24,7 @@ export const ClientDashBoardComponent = ({...props}:ClientDashBoardProps) => {
             .then((result) => {
                 firebaseModel = new FireBaseModel(result);
                 setData(firebaseModel.Data);
+                console.log(firebaseModel.Data);
             })
             .catch((err) => {
                 console.log(err);

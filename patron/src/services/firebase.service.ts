@@ -7,10 +7,10 @@ import {
 import { 
     getFirestore, 
     collection, 
-    getDocs, doc, 
+    getDocs, doc, deleteDoc,
     QueryDocumentSnapshot, DocumentSnapshot,
-    addDoc, getDoc, DocumentData } from 'firebase/firestore';
-import { ItemEntity, OrderItemEntity } from '../models/firebase-data.model';
+    addDoc, getDoc,  } from 'firebase/firestore';
+import { ItemEntity, OrderItemEntity } from '../models/shared-data.model';
 
 export class FirebaseService {
 
@@ -71,6 +71,14 @@ export class FirebaseService {
             addDoc(collection(this.firebaseDB, `bars/${barUID}/orders`), cart)
                 .then(() => resolve(true))
                 .catch(err => console.log(err))
+        });
+    }
+
+    async removeFromCollection(colName: string, docId: string){
+        return new Promise((resolve, reject) => {
+            deleteDoc(doc(this.firebaseDB, colName, docId))
+                .then(() => resolve(true))
+                .catch(err => reject(err));
         });
     }
 

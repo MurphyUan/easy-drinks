@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
+import { ItemEntity } from '../../../models/shared-data.model';
 
-export type OrderItemProps = {
-    name: string;
-    price: number;
-    quantity: number;
-}
-
-export const OrderItemComponent = ({...props}:OrderItemProps) => {
+export const OrderItemComponent = ({...props}:ItemEntity) => {
     return (
         <a>{props.name} x{props.quantity} : €{props.price}</a>
     )

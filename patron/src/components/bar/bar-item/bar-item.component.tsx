@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FireBaseEntity } from "../../../models/firebase-data.model";
+import { FireBaseEntity } from "../../../models/shared-data.model";
 import './bar-item.component.scss';
 
 interface BarItemProps {

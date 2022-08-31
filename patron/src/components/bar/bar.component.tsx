@@ -1,5 +1,5 @@
 import React , { useMemo, useState } from 'react';
-import { FireBaseEntity, MenuItemEntity } from '../../models/firebase-data.model';
+import { FireBaseEntity, MenuItemEntity } from '../../models/shared-data.model';
 import { CartService } from '../../services/cart.service';
 import { FirebaseService } from '../../services/firebase.service';
 import { CartComponent } from '../cart/cart.component';

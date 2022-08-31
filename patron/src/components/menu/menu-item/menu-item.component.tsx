@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MenuItemEntity } from "../../../models/firebase-data.model";
+import { MenuItemEntity } from "../../../models/shared-data.model";
 import { CartService } from "../../../services/cart.service";
 
 export type MenuItemProps = {
